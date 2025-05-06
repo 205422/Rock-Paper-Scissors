@@ -67,7 +67,11 @@ let computerScore = 0;
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         console.log("It's a tie!");
-    } else if ((humanChoice === "rock" && computerChoice === "scissors") || (humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper")) {
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") || 
+        (humanChoice === "paper" && computerChoice === "rock") || 
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
         humanScore++;
         console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}!`);
     } else {
@@ -79,7 +83,7 @@ function playRound(humanChoice, computerChoice) {
 
 
 //Define function playgame()
-//Move playround function  and score variables inside playGame function
+//Move playround function and score variables inside playGame function
 //Create a for loop that calls palyRound five times
 
 function playGame() {
