@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -7,10 +10,61 @@ body {
     align-items: center;
     padding: 30px 30px;
     background-color: lightblue;
-    max-width: 100vw;
-    max-height: 100vh;
     overflow: auto;
 }
 h1 {
     font-size: 3rem;
+}
+#choices {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   
+}
+#choices button {
+    background-color: hsl(200, 100%, 70%);
+    font-size: min(8rem, 20vw);
+    min-width: min(200px, 25vw);
+    margin: 0 20px;
+    border-radius: 250px;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+}
+#choices button:hover {
+    background-color: hsl(200, 100%, 50%);
+    transform: scale(1);
+}
+#round {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+#result {
+    font-size: 3rem;
+    margin: 5px 0;
+}
+#scoreContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#playerDisplay, #computerDisplay, #playerScore, #computerScore {
+    font-size: 2rem;
+}
+#scoreOfPlayerScore {
+    color: greenyellow;
+}
+.#scoreOfComputerScore {
+    color: red;
+}
+#resetBtn {
+    margin-top: 20px;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+#resetBtn:hover {
+    background-color: #ddd;
 }
