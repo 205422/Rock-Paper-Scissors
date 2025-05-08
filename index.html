@@ -9,37 +9,43 @@
 </head>
 <body>
 
-	<h1> ROCK - PAPER - SCISSORS</h1>
+	<header>
+		<h1> ROCK - PAPER - SCISSORS</h1>
+	</header>
 
-	<div id="choices">
-		<button data-set="rock">✊</button>
-		<button data-set="paper">✋</button>
-		<button data-set="scissors">✌️</button>
-	</div>
+	<main>
+		<section id="choices" aria-live="polite">
+			<button class="choiceBtn" type="button" data-choice="rock" aria-label="rock">✊</button>
+			<button class="choiceBtn" type="button" data-choice="paper" aria-label="paper">✋</button>
+			<button class="choiceBtn" type="button" data-choice="scissors" aria-label="scissors">✌️</button>
+		</section>
 
-	<div id="round">Round: 
-		<span id="roundNum"></span>
-	</div>
+		<section id="roundContainer" aria-live="polite">
+			<p>Round: <span id="roundNum">1</span></p>
+		</section>
 
-	<div id="player">Player: 
-		<span id="playerSelection"></span>
-	</div>
+		<section id="playerDisplay" aria-live="polite">
+			<p>Player: <span id="playerSelection">—</span></p>
+		</section>
 
-	<div id="computer">Computer: 
-		<span id="computerSelection"></span>
-	</div>
+		<section id="computerDisplay" aria-live="polite">
+			<p>Computer: <span id="computerSelection">—</span></p>
+		</section>
 
-	<div id="result"></div>
+		<section id="result" aria-live="polite"></section>
 
-	<div id="playerScore">Player score: 
-		<span id="scoreOfPlayer">0</span>
-	</div>
+		<section id="scoreContainer" aria-live="polite">
+			<div id="playerScore">
+				<p>Player score: <span id="scoreOfPlayer">0</span></p>
+			</div>
 
-	<div id="computerScore">Computer score: 
-		<span id="scoreOfComputer">0</span>
-	</div>
+			<div id="computerScore">
+				<p>Computer score: <span id="scoreOfComputer">0</span></p>
+			</div>
+		</section>
 
-	<button id="restBtn">Play Again</button>
+		<button type="button" id="resetBtn">Play Again</button>
+	</main>
 
 </body>
 </html>
