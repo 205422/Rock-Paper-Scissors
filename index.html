@@ -4,22 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RPS</title>
-    <link rel="stylesheet" href="style.css">
     <script defer src="java.js"></script>
 </head>
 <body>
 
-    <h1>Rock - Paper - Scissors</h1>
+	<h1> ROCK - PAPER - SCISSORS</h1>
+	
+	<div id="choices">
+		<button data-set="rock">✊</button>
+		<button data-set="paper">✋</button>
+		<button data-set="scissors">✌️</button>
+	</div>
 
-		<div class="choices">
-    	<button id="btnRock">✊</button>
-    	<button id="btnPaper">✋</button>
-    	<button id="btnScissors">✌️</button>
-		</div>
+	<div id="round">Round: 
+		<span id="roundNum"></span>
+	</div>
 
-    <div id="playerDisplay">Player:</div>
-    <div id="computerDisplay">Comuter:</div>
-    <div id="resultDisplay">Final Result!</div>
+	<div id="player">Player: 
+		<span id="playerSelection"></span>
+	</div>
+
+	<div id="computer">Computer: 
+		<span id="computerSelection"></span>
+	</div>
+
+	<div id="result"></div>
+
+	<div id="playerScore">Player score: 
+		<span id="scoreOfPlayer">0</span>
+	</div>
+
+	<div id="computerScore">Computer score: 
+		<span id="scoreOfComputer">0</span>
+	</div>
+
+	<button id="restBtn">Play Again</button>
 
 </body>
 </html>
