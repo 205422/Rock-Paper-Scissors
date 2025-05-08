@@ -11,3 +11,6 @@ body {
     max-height: 100vh;
     overflow: auto;
 }
+h1 {
+    font-size: 3rem;
+}
