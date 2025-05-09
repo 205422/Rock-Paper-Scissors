@@ -14,6 +14,16 @@ body {
 }
 h1 {
     font-size: 3rem;
+    margin-top: 0;
+}
+main, #displayContainer, #scoreContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+}
+#resultDisplay {
+    font-size: 5rem;
 }
 #choices {
     margin-bottom: 30px;
@@ -36,26 +46,18 @@ h1 {
     background-color: hsl(200, 100%, 50%);
     transform: scale(1);
 }
-#round {
+#roundContainer {
     font-size: 2rem;
     margin-bottom: 20px;
-}
-#result {
-    font-size: 3rem;
-    margin: 5px 0;
-}
-#scoreContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#playerDisplay, #computerDisplay, #playerScore, #computerScore {
-    font-size: 2rem;
+
+.greenText, #playerScoreDisplay {
+    color: green;
 }
-#scoreOfPlayerScore {
-    color: greenyellow;
-}
-.#scoreOfComputerScore {
+.redText, #computerScoreDisplay {
     color: red;
 }
 #resetBtn {
@@ -64,7 +66,14 @@ h1 {
     font-size: 1.5rem;
     background-color: lightgrey;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #resetBtn:hover {
     background-color: #ddd;
+}
+h2 {
+    font-size: 2.5rem;
+    margin: 0;
 }
