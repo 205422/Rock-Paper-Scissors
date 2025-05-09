@@ -1,111 +1,148 @@
- //Capitalize first letter of template litteral
+//Define selection choices
+const choices = ["rock", "paper", "scissors"];
 
-function capitalize(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-}
+//Get references to all necessary DOM elements used in game
+const buttons = document.querySelectorAll("#choices button");
+const playerDisplay = document.querySelector("#playerDisplay");
+const computerDisplay = document.querySelector("#computerDisplay");
+const resultDisplay = document.querySelector("#resultDisplay");
+const roundDisplay = document.querySelector("#roundNum");
+const playerScoreDisplay = document.querySelector("#playerScoreDisplay");
+const computerScoreDisplay = document.querySelector("#computerScoreDisplay");
+const resetBtn = document.querySelector("#resetBtn");
 
+//Create game message constants
+const roundWin = "You win! 😄";
+const roundLose = "You lose! 😞"
+const roundTie = "It's a tie! 🤝"
+const gameWin = "🏆 Final Result: You are the winner!";
+const gameLose = "💻 Final Result: Computer wins!";
+const gameTie = "🤝 Final Result: It's a tie!";
 
-
-//Define function getComputerChoice()
-    //SET randomNum TO RANDOM_NUMBER(1, 3)
-    //SET getComputerChoice equal to rock
-        //IF randomNum is 1
-    //SET getComputerChoice equal to paper
-        //IF randomNum is 2
-    //SET getComputerChoice equal to scissors
-        //IF randomNum is 3
-
-function getComputerChoice() {
-    const randomNum = Math.floor(Math.random() * 3) + 1;
-    switch(randomNum) {
-        case 1:
-            return "rock"; 
-            break; 
-        case 2:
-            return "paper";
-            break;
-        case 3:
-            return "scissors";
-            break;
-    }
-
-}
-
-
-
-//Define function getHumanChoice()
-    //GET user input choice of (rock, paper, scissors)
-    //Return user input choice (case insensitive)
-
-function getHumanChoice() {
-    let choice = prompt ('Pick one: "Rock" || "Paper" || "Scissors"');
-    return choice.toLowerCase();
-}
-
-//Define interger variable for human/computerScore with initial value 0
-
-let humanScore = 0;
+//Initialize score and round tracking variables for the game
+let playerScore = 0;
 let computerScore = 0;
+let round = 0;
+const maxRound = 5
 
-
-
-//Define function playRound(humanChoice, computerChoice)
-    //IF humanChoice is strict equality to computerChoice
-        //Tell console to log a string value representing no round winner
-    //ELSE IF humanChoice is strict equality to "rock"
-    //AND computerChoice is strict equlity to "scissors"
-    //OR humanChoice is strict equality to "paper"
-    //AND computerChoice is strict equality to "rock"
-    //OR humanChoice is strict equality to "scissors"
-    //AND computerChoice is strict equality to "paper"
-        //Increase humanScore by 1
-        //Tell console to log a string value representing the user wins
-    //ELSE
-        //Increase computerScore by 1
-        //Tell console to log a string value representing the user lost
-
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
-    } else if ((humanChoice === "rock" && computerChoice === "scissors") || (humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper")) {
-        humanScore++;
-        console.log(`You win! ${capitalize(humanChoice)} beats ${computerChoice}!`);
-    } else {
-        computerScore++;
-        console.log(`You lost! ${capitalize(computerChoice)} beats ${humanChoice}!`);
-    }
+function isGameOver() {
+	return round >= maxRound;
 }
 
+//============================
+//▶️ Main Game Function
+//============================
 
+//Play one round:
+//Randomly select computer's choice
+//Compares with the player selection
+//Updates round counter, scores, and displays result
+//Ends game and declares result after max rounds
+function playGame(playerSelection) {
+	if (isGameOver()) return;
 
-//Define function playgame()
-//Move playround function  and score variables inside playGame function
-//Create a for loop that calls palyRound five times
+	const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 
-function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
+	playerDisplay.textContent = playerSelection;
+	computerDisplay.textContent = computerSelection;
 
+	let result;
 
+	if (playerSelection === computerSelection) {
+		result = roundTie
+	} else {
+		switch(playerSelection) {
+			case "rock":
+				result = (computerSelection === "scissors") ? roundWin : roundLose;
+				break;
+			case "paper":
+				result = (computerSelection === "rock") ? roundWin : roundLose;
+				break;
+			case "scissors":
+				result = (computerSelection === "paper") ? roundWin : roundLose;
+				break;
+		}
+	}
 
-    //Tell console to log a string value declaring the final score of user and computer
+	//Increment score based on result
+	if (result === roundWin) {
+		playerScore++;
+	} else if (result === roundLose) {
+		computerScore++;
+	}
 
-    console.log("\n--- Final Score ---");
-    console.log(`You: ${humanScore} - Computer: ${computerScore}`);
+	resultDisplay.textContent = result;
+	playerScoreDisplay.textContent = playerScore;
+	computerScoreDisplay.textContent = computerScore;
 
+	//Reset result text color before setting new one
+	resultDisplay.classList.remove("greenText", "redText");
 
+	switch(result) {
+		case roundWin:
+			resultDisplay.classList.add("greenText");
+			break;
+		case roundLose:
+			resultDisplay.classList.add("redText");
+			break;
+	}
 
-    //Tell console to log a string value based on the final results of the game
+	round++;
+	roundDisplay.textContent = `${round} of ${maxRound}`;
 
-    if (humanScore > computerScore) {
-        console.log("You are the winner!");
-    } else if (humanScore < computerScore) {
-        console.log("You lost. Better luck next time.");
-    } else {
-        console.log("It's a tie game! Try again?")
-    }
+//============================
+//🏁 End-of-Game Logic
+//============================
+
+	//Determine reult of game
+	if (isGameOver) {
+		resultDisplay.classList.remove("greenText", "redText");
+
+		if(playerScore > computerScore) {
+			resultDisplay.textContent = gameWin;
+			resultDisplay.classList.add("greenText");
+		} else if (playerScore < computerScore) {
+			resultDisplay.textContent = gameLose;
+			resultDisplay.classList.add("redText");
+		} else {
+			resultDisplay.textContent = gameTie;
+		}
+
+	//Disable choice buttons when game ends
+	document.querySelectorAll("#choices button").forEach(button => {
+		button.disabled = true;
+		button.style.opacity = "0.5";
+		button.style.cursor = "not-allowed";
+	});
+	}
 }
-playGame();
+
+//Add event listener for player game buttons
+buttons.forEach(button => {
+	button.addEventListener("click", () => {
+		const choice = button.getAttribute("data-choice");
+		playGame(choice);
+	});
+});
+
+//============================
+//🔁 Reset Button
+//============================
+
+//Add event listener for reset button
+resetBtn.addEventListener("click", () => {
+	playerScore = 0;
+	computerScore = 0;
+	round = 0;
+	resultDisplay.textContent = "";
+	playerDisplay.textContent = "";
+	computerDisplay.textContent = "";
+	playerScoreDisplay.textContent = "0";
+	computerScoreDisplay.textContent ="0";
+	roundDisplay.textContent = `${round} of ${maxRound}`;
+	buttons.forEach(button => {
+		button.disabled = false;
+		button.style.opacity = "1";
+		button.style.cursor = "pointer";
+	});
+});
