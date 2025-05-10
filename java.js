@@ -95,7 +95,7 @@ function playGame(playerSelection) {
 //============================
 
 	//Determine reult of game
-	if (isGameOver) {
+	if (isGameOver ()) {
 		resultDisplay.classList.remove("greenText", "redText");
 
 		if(playerScore > computerScore) {
